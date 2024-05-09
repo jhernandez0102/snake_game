@@ -24,42 +24,48 @@ class Block:
     size = (50, 50)
     color = (255, 0, 0) #rojo
     position = (200, 200)
+    last_position = position
     screen = pygame.display.get_surface()
+    block_father = None
     
-    def __init__(self, screen, position, color):
+    def __init__(self, screen, position, color, father):
         self.screen = screen
         self.position = position
-        self.color = color        
+        self.color = color 
+        self.block_father = father      
         
     def paint(self):
         pygame.draw.rect(self.screen, self.color, [self.position[0], self.position[1], self.size[0], self.size[1]], 0)
         pygame.display.flip()
     
     def move(self, direction):
-        if direction == "up":
-            if self.position[1] - self.size[1] < 0:
-                self.position = (self.position[0], 0)
-            else:
-                self.position = (self.position[0], self.position[1] - self.size[1])
-                
-        if direction == "down":
-            if self.position[1] - self.size[1] > 550:
-                self.position = (self.position[0], 550)
-            else:
-                self.position = (self.position[0], self.position[1] + self.size[1])
-        
-        if direction == "left":
-            if self.position[0] - self.size[0] < 0:
-                self.position = (self.position[0], 0)
-            else:
-                self.position = (self.position[0] - self.size[0], self.position[1] ) 
-        
-        if direction == "rigth":
-            if self.position[0] - self.size[0] > 550:
-                self.position = (self.position[0], 550)
-            else:
-                self.position = (self.position[0] + self.size[0], self.position[1] )
-        
+        self.last_position = self.position
+        if(self.block_father is None):
+            if direction == "up":
+                if self.position[1] - self.size[1] < 0:
+                    self.position = (self.position[0], 0)
+                else:
+                    self.position = (self.position[0], self.position[1] - self.size[1])
+                    
+            if direction == "down":
+                if self.position[1] - self.size[1] > 550:
+                    self.position = (self.position[0], 550)
+                else:
+                    self.position = (self.position[0], self.position[1] + self.size[1])
+            
+            if direction == "left":
+                if self.position[0] - self.size[0] < 0:
+                    self.position = (self.position[0], 0)
+                else:
+                    self.position = (self.position[0] - self.size[0], self.position[1] ) 
+            
+            if direction == "rigth":
+                if self.position[0] - self.size[0] > 550:
+                    self.position = (self.position[0], 550)
+                else:
+                    self.position = (self.position[0] + self.size[0], self.position[1] )
+        else:
+            self.position = self.block_father.last_position
 
       
 pygame.init()
@@ -70,8 +76,11 @@ clock = pygame.time.Clock()
 gameOver = False
 
 world_game = World(screen)
-bloque1 = Block(screen, (400, 400), (0, 255, 0))
-bloque2 = Block(screen, (200, 200), (255, 0, 0))
+
+bloque2 = Block(screen, (200, 200), (255, 0, 0), None)
+bloque1 = Block(screen, (400, 400), (0, 255, 0), bloque2)
+bloque3 = Block(screen, (400, 400), (0, 255, 0), bloque1)
+bloque4 = Block(screen, (400, 400), (0, 255, 0), bloque3)
 
 while not gameOver:
     for event in pygame.event.get():
@@ -81,8 +90,11 @@ while not gameOver:
     world_game.paint()
     bloque1.paint()
     bloque2.paint()
+    bloque3.paint()
+    bloque4.paint()
     bloque1.move("up")
-    
+    bloque3.move("up")
+    bloque4.move("up")
     
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
