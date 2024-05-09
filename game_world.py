@@ -9,7 +9,7 @@ class World:
     screen = pygame.display.get_surface()
     
     def __init__(self):
-        pass
+        self.size = (600, 600)
     
     def paint(self):
         self.screen.fill(self.bg_color)
