@@ -21,7 +21,7 @@ class World:
         pygame.display.flip()
 
 class Block:
-    size = (48, 48)
+    size = (50, 50)
     color = (255, 0, 0) #rojo
     position = (200, 200)
     screen = pygame.display.get_surface()
@@ -34,6 +34,31 @@ class Block:
     def paint(self):
         pygame.draw.rect(self.screen, self.color, [self.position[0], self.position[1], self.size[0], self.size[1]], 0)
         pygame.display.flip()
+    
+    def move(self, direction):
+        if direction == "up":
+            if self.position[1] - self.size[1] < 0:
+                self.position = (self.position[0], 0)
+            else:
+                self.position = (self.position[0], self.position[1] - self.size[1])
+                
+        if direction == "down":
+            if self.position[1] - self.size[1] > 550:
+                self.position = (self.position[0], 550)
+            else:
+                self.position = (self.position[0], self.position[1] + self.size[1])
+        
+        if direction == "left":
+            if self.position[0] - self.size[0] < 0:
+                self.position = (self.position[0], 0)
+            else:
+                self.position = (self.position[0] - self.size[0], self.position[1] ) 
+        
+        if direction == "rigth":
+            if self.position[0] - self.size[0] > 550:
+                self.position = (self.position[0], 550)
+            else:
+                self.position = (self.position[0] + self.size[0], self.position[1] )
         
 
       
@@ -56,7 +81,18 @@ while not gameOver:
     world_game.paint()
     bloque1.paint()
     bloque2.paint()
+    bloque1.move("up")
     
+    
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        bloque2.move("up")
+    if keys[pygame.K_s]:
+        bloque2.move("down")
+    if keys[pygame.K_a]:
+        bloque2.move("left")
+    if keys[pygame.K_d]:
+        bloque2.move("rigth")
     
     clock.tick(5)
 pygame.quit()
