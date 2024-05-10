@@ -88,23 +88,34 @@ while not gameOver:
             gameOver = True
     
     world_game.paint()
-    bloque1.paint()
-    bloque2.paint()
-    bloque3.paint()
-    bloque4.paint()
-    bloque1.move("up")
-    bloque3.move("up")
-    bloque4.move("up")
     
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
         bloque2.move("up")
+        bloque1.move("up")
+        bloque3.move("up")
+        bloque4.move("up")
     if keys[pygame.K_s]:
         bloque2.move("down")
+        bloque1.move("up")
+        bloque3.move("up")
+        bloque4.move("up")
     if keys[pygame.K_a]:
         bloque2.move("left")
+        bloque1.move("up")
+        bloque3.move("up")
+        bloque4.move("up")
     if keys[pygame.K_d]:
         bloque2.move("rigth")
+        bloque1.move("up")
+        bloque3.move("up")
+        bloque4.move("up")
+    
+    
+    bloque1.paint()
+    bloque2.paint()
+    bloque3.paint()
+    bloque4.paint()
     
     clock.tick(5)
 pygame.quit()
