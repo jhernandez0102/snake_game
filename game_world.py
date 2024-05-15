@@ -1,6 +1,5 @@
 import pygame
 
-
 class World:
     size = (600, 600)
     block_size = (50, 50)
@@ -8,8 +7,9 @@ class World:
     block_color = (0, 0, 0)
     screen = pygame.display.get_surface()
     
-    def __init__(self):
+    def __init__(self, screen):
         self.size = (600, 600)
+        self.screen = screen
     
     def paint(self):
         self.screen.fill(self.bg_color)
