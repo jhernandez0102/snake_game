@@ -32,6 +32,9 @@ class Block:
     def set_position(self, position):
         self.position = position
     
+    def set_color(self, color):
+        self.color = color
+        
     def set_father(self, father):
         self.block_father = father
                   
