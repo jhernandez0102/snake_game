@@ -2,6 +2,7 @@ import pygame
 
 from game_world import World
 from block import Block
+from snake import Snake
       
 pygame.init()
 size = (600, 600)
@@ -11,11 +12,8 @@ clock = pygame.time.Clock()
 gameOver = False
 
 world_game = World(screen)
-
-bloque2 = Block(screen, (200, 200), (255, 0, 0), None)
-bloque1 = Block(screen, (400, 400), (0, 255, 0), bloque2)
-bloque3 = Block(screen, (400, 400), (0, 255, 0), bloque1)
-bloque4 = Block(screen, (400, 400), (0, 255, 0), bloque3)
+snake = Snake(screen)
+n = 0
 
 while not gameOver:
     for event in pygame.event.get():
@@ -23,36 +21,20 @@ while not gameOver:
             gameOver = True
     
     world_game.paint()
+    snake.paint()
     
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
-        bloque2.move("up")
-        bloque1.move("up")
-        bloque3.move("up")
-        bloque4.move("up")
+        snake.grow()
+        snake.move("up")
     if keys[pygame.K_s]:
-        bloque2.move("down")
-        bloque1.move("up")
-        bloque3.move("up")
-        bloque4.move("up")
+        snake.move("down")
     if keys[pygame.K_a]:
-        bloque2.move("left")
-        bloque1.move("up")
-        bloque3.move("up")
-        bloque4.move("up")
+        snake.move("left")
     if keys[pygame.K_d]:
-        bloque2.move("rigth")
-        bloque1.move("up")
-        bloque3.move("up")
-        bloque4.move("up")
+        snake.move("rigth")
     
-    
-    bloque1.paint()
-    bloque2.paint()
-    bloque3.paint()
-    bloque4.paint()
-    
-    clock.tick(5)
+    clock.tick(8)
 pygame.quit()
 
 
