@@ -43,25 +43,25 @@ class Block:
         if(self.block_father is None):
             if direction == "up":
                 if self.position[1] - self.size[1] < 0:
-                    self.position = (self.position[0], 0)
+                    self.position = (self.position[0], 550)
                 else:
                     self.position = (self.position[0], self.position[1] - self.size[1])
                     
             if direction == "down":
                 if self.position[1] - self.size[1] > 550:
-                    self.position = (self.position[0], 550)
+                    self.position = (self.position[0], 0)
                 else:
                     self.position = (self.position[0], self.position[1] + self.size[1])
             
             if direction == "left":
                 if self.position[0] - self.size[0] < 0:
-                    self.position = (self.position[0], 0)
+                    self.position = (550, self.position[1])
                 else:
                     self.position = (self.position[0] - self.size[0], self.position[1] ) 
             
             if direction == "rigth":
                 if self.position[0] - self.size[0] > 550:
-                    self.position = (self.position[0], 550)
+                    self.position = ( 0 , self.position[1])
                 else:
                     self.position = (self.position[0] + self.size[0], self.position[1] )
         else:
@@ -69,3 +69,13 @@ class Block:
             
         if(self.block_child is not None):
             self.block_child.move(direction)
+        
+        if(self.position[0] > 600):
+            self.position = (0, self.position[1])
+        if(self.position[0] < 0):
+            self.position = (550, self.position[1])
+        if(self.position[1] > 600):
+            self.position = (self.position[0], 0)
+        if(self.position[1] < 0):
+            self.position = (self.position[0], 550)
+
