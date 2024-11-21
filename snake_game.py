@@ -40,7 +40,9 @@ while not gameOver:
     #if keys[pygame.K_SPACE]:
         #food.disappear()
     snake.match(food)
-    
+    if(snake.self_collition()):
+        pygame.quit()
+
     clock.tick(8)
 pygame.quit()
 

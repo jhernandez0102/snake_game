@@ -37,3 +37,19 @@ class Snake:
             print("Comí")
             food.disappear()
             self.grow()
+
+    def self_collition(self):
+        collition = False
+        position_head = self.blocks[0].position
+        index = 0
+        for block in self.blocks:
+            if index == 0:
+                continue
+            else:
+                if position_head == block.position:
+                    collition = True
+                    break
+            
+            index = index + 1
+
+        return collition
