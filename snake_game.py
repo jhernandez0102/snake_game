@@ -26,15 +26,17 @@ while not gameOver:
     snake.paint()
     food.paint()
     
+    snake.move_step();
+    
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
-        snake.move("up")
+        snake.change_direction("up")
     if keys[pygame.K_s]:
-        snake.move("down")
+        snake.change_direction("down")
     if keys[pygame.K_a]:
-        snake.move("left")
+        snake.change_direction("left")
     if keys[pygame.K_d]:
-        snake.move("rigth")
+        snake.change_direction("rigth")
     #if keys[pygame.K_SPACE]:
         #food.disappear()
     snake.match(food)

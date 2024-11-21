@@ -3,6 +3,7 @@ from block import Block
 
 class Snake:
     blocks = []
+    direction = "up"
     
     def __init__(self, screen):
         self.screen = screen
@@ -12,6 +13,12 @@ class Snake:
         self.blocks[0].move(direction)
         if(self.blocks[0].block_child is not None):
             self.blocks[0].block_child.move(direction)
+    
+    def move_step(self):
+        self.move(self.direction)
+        
+    def change_direction(self, direction):
+        self.direction = direction
     
     def paint(self):
         self.blocks[0].paint()
